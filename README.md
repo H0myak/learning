@@ -1,2 +1,1 @@
-# learning
-# TEST
+Test scrypts on python3
