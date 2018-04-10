@@ -1,1 +1,1 @@
-Test scrypts on python3
+Test scripts
