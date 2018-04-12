@@ -6,7 +6,7 @@ from datetime import datetime
 
 password = ''
 alphabet = "0123456789aAbCdEfHiJkLmNpqRtUvWxY"
-print(len(alphabet))
+
 random_number = str(datetime.utcnow().strftime('%f'))
 
 chain = int(input ("Characters in string: "))
