@@ -6,7 +6,7 @@ from datetime import datetime
 
 password = ''
 alphabet = "0123456789aAbCdEfHiJkLmNpqRtUvWxY"
-
+counter = n = 0
 random_number = str(datetime.utcnow().strftime('%f'))
 
 chain = int(input ("Characters in string: "))
@@ -25,12 +25,10 @@ while len(random_number) < chain * number * 2:
 while int(random_number) >= 33:
 	random_number = int(random_number)//33
 	password += alphabet[random_number % 33]
-
-n = 0
 while n < len(password):
-	if len(password[n : n + chain]) < chain:
+	if len(password[n : n + chain]) < chain or counter == number:
 		sys.exit(0)
 	print (password[n : n + chain])
 	n += chain
-
+	counter += 1
 sys.exit(0)
