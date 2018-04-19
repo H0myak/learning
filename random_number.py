@@ -2,15 +2,32 @@
 
 import sys
 import math
+import getopt
 from datetime import datetime
 
-password = ''
-alphabet = "0123456789aAbCdEfHiJkLmNpqRtUvWxY"
-random_number = str(datetime.utcnow().strftime('%f'))
-help = "./random_generator.py -c <number of symbols in password> -n <number of string>"
+def main (argv):
+	password = ''
+	alphabet = "0123456789aAbCdEfHiJkLmNpqRtUvWxY"
+	random_number = str(datetime.utcnow().strftime('%f'))
+	help_message = "./random_generator.py -c <number of symbols in password> -n <number of string>"
 
+	try:
+		opts, args = getopt.getopt(argv,"hc:n:",["chain=", "number="])
+	except:
+		print (help_message)
+		sys.exit(1)
+
+	for opt,arg in opts:
+		if opt=='-h':
+			print (help_message)
+			sys.exit()
+		elif opt in ("-c","--chain"):
+			chain = int(arg)
+		elif opt in ("-n","--number"):
+			number = int(arg)	
+	random(chain,number,password,alphabet,random_number)
+	
 def random(chain,number,password,alphabet,random_number):
-
 	while len(random_number) < chain * number * 2:
 		try:
 			random_number = str(int(math.pow(int(random_number),2)))
@@ -33,23 +50,5 @@ def random(chain,number,password,alphabet,random_number):
 		counter += 1
 	sys.exit(0)
 
-try:
-	print (str(sys.argv[1:]))
-	for n in sys.argv[1:]:
-		print (str(n))
-		if sys.argv[n] == '-c':
-			chain = 8 #int(sys.argv[n + 1])
-#			n += 2
-		elif sys.argv[n] == '-n':
-			number = 5 #int(sys.argv[n + 1])
-#			n += 2
-		elif sys.argv[n] == '-h' or sys.argv[n] == '--help':
-			print (help)
-			sys.exit()
-#		else:
-#			n += 1
-except:
-	print(help)
-	sys.exit(1)
-
-random(chain,number,password,alphabet,random_number)
+if __name__ == "__main__":
+	main(sys.argv[1:])
